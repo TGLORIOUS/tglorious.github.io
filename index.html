@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeleel | Data Analyst Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070b14;
+    --bg2: #0d1421;
+    --bg3: #111827;
+    --accent: #00d4ff;
+    --accent2: #7c3aed;
+    --accent3: #10b981;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --card: #0f172a;
+    --border: rgba(0,212,255,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ANIMATED GRID BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(7,11,20,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-content { max-width: 700px; }
+
+  .hero-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s ease 0.1s both;
+  }
+
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    max-width: 540px;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s ease 0.3s both;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+    padding: 0.8rem 1.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+
+  .btn-primary:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,212,255,0.3);
+  }
+
+  .btn-secondary {
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.8rem 1.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* STATS */
+  .stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 0.8s ease 0.4s both;
+    flex-wrap: wrap;
+  }
+
+  .stat-item { text-align: left; }
+
+  .stat-number {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+
+  .section-desc {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.8;
+    max-width: 550px;
+    margin-bottom: 3rem;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: all 0.3s;
+  }
+
+  .skill-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,212,255,0.1);
+  }
+
+  .skill-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    text-align: center;
+  }
+
+  .skill-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .skill-level {
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.8rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+
+  .project-card:hover::before { transform: scaleX(1); }
+
+  .project-card:hover {
+    border-color: rgba(0,212,255,0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+
+  .project-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .tag-sql { background: rgba(0,212,255,0.1); color: var(--accent); }
+  .tag-powerbi { background: rgba(234,179,8,0.1); color: #eab308; }
+  .tag-excel { background: rgba(16,185,129,0.1); color: var(--accent3); }
+  .tag-sheets { background: rgba(124,58,237,0.1); color: #a78bfa; }
+
+  .project-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.7rem;
+    line-height: 1.4;
+  }
+
+  .project-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 1px;
+    transition: gap 0.3s;
+  }
+
+  .project-link:hover { gap: 0.8rem; }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  .about-text strong { color: var(--text); }
+
+  .certs-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .cert-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1.2rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+  }
+
+  .cert-item:hover {
+    border-color: var(--accent3);
+    transform: translateX(5px);
+  }
+
+  .cert-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent3);
+    flex-shrink: 0;
+  }
+
+  /* CONTACT */
+  .contact-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 3rem;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-box::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
+    border-radius: 16px;
+    z-index: -1;
+    opacity: 0.3;
+  }
+
+  .contact-box h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+
+  .contact-box p {
+    color: var(--muted);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-family: 'Space Mono', monospace;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .nav-links { display: none; }
+    .stats { gap: 1.5rem; }
+    .hero h1 { font-size: 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">TGLORIOUS</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <span class="hero-tag">⚡ AVAILABLE FOR REMOTE ROLES</span>
+    <h1>Data Analyst<br><span>turning numbers</span><br>into decisions.</h1>
+    <p class="hero-desc">
+      ALX Africa certified analyst based in Abuja, Nigeria. I specialise in SQL, 
+      Power BI and data storytelling — transforming messy real-world datasets 
+      into clear, actionable insights for decision-makers.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">VIEW MY WORK</a>
+      <a href="https://github.com/TGLORIOUS" target="_blank" class="btn-secondary">GITHUB PROFILE</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat-item">
+        <span class="stat-number">10+</span>
+        <span class="stat-label">Projects Completed</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">60K+</span>
+        <span class="stat-label">Rows Analysed</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">4</span>
+        <span class="stat-label">Tools Mastered</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">3</span>
+        <span class="stat-label">Certifications</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-tag">// TECH STACK</p>
+  <h2 class="section-title">Skills & Tools</h2>
+  <p class="section-desc">
+    Building expertise across the full data analyst stack — from raw SQL queries 
+    to polished executive dashboards.
+  </p>
+
+  <div class="skills-grid fade-in">
+    <div class="skill-card">
+      <div class="skill-icon">🗄️</div>
+      <div>
+        <div class="skill-name">MySQL / SQL</div>
+        <div class="skill-level">Advanced</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📊</div>
+      <div>
+        <div class="skill-name">Power BI</div>
+        <div class="skill-level">Advanced</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📐</div>
+      <div>
+        <div class="skill-name">DAX</div>
+        <div class="skill-level">Intermediate</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📗</div>
+      <div>
+        <div class="skill-name">Microsoft Excel</div>
+        <div class="skill-level">Advanced</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📑</div>
+      <div>
+        <div class="skill-name">Google Sheets</div>
+        <div class="skill-level">Intermediate</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🐍</div>
+      <div>
+        <div class="skill-name">Python</div>
+        <div class="skill-level">In Progress</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔧</div>
+      <div>
+        <div class="skill-name">Data Cleaning</div>
+        <div class="skill-level">Advanced</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <div>
+        <div class="skill-name">GitHub</div>
+        <div class="skill-level">Intermediate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-tag">// PORTFOLIO</p>
+  <h2 class="section-title">Featured Projects</h2>
+  <p class="section-desc">
+    Real-world datasets. Real analysis. Real findings.
+  </p>
+
+  <div class="projects-grid fade-in">
+
+    <div class="project-card">
+      <div class="project-tags">
+        <span class="tag tag-sql">SQL</span>
+        <span class="tag tag-sql">MySQL</span>
+      </div>
+      <div class="project-title">Maji Ndogo Water Crisis — SQL Analysis</div>
+      <div class="project-desc">
+        4-part SQL investigation on a 60,000+ row database. Uncovered corruption 
+        using CTEs and statistical analysis. Generated 25,398 improvement tasks 
+        for a national water infrastructure plan.
+      </div>
+      <a href="https://github.com/TGLORIOUS/data-analytics-portfolio/tree/main/02-maji-ndogo-water-crisis" target="_blank" class="project-link">VIEW PROJECT →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-tags">
+        <span class="tag tag-powerbi">Power BI</span>
+        <span class="tag tag-powerbi">DAX</span>
+      </div>
+      <div class="project-title">Maji Ndogo — Tracking Water Funds</div>
+      <div class="project-desc">
+        Advanced Power BI dashboard for President Naledi tracking $147M in water 
+        infrastructure spending. Features KPI visuals, budget vs actual analysis, 
+        vendor performance and real-time progress mapping.
+      </div>
+      <a href="https://github.com/TGLORIOUS/data-analytics-portfolio/tree/main/07-maji-ndogo-water-funds" target="_blank" class="project-link">VIEW PROJECT →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-tags">
+        <span class="tag tag-sheets">Google Sheets</span>
+      </div>
+      <div class="project-title">Global Drinking Water Access Analysis</div>
+      <div class="project-desc">
+        WHO/UNICEF data analysis across 231 countries. Calculated Annual Rate of 
+        Change — Nigeria ranked top 5 fastest improving nations. Aligned with 
+        UN Sustainable Development Goal 6.
+      </div>
+      <a href="https://github.com/TGLORIOUS/data-analytics-portfolio/tree/main/01-water-access-analysis" target="_blank" class="project-link">VIEW PROJECT →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-tags">
+        <span class="tag tag-powerbi">Power BI</span>
+        <span class="tag tag-powerbi">DAX</span>
+      </div>
+      <div class="project-title">Maji Ndogo — Final Executive Report</div>
+      <div class="project-desc">
+        Executive-level Power BI report built for government decision-makers. 
+        Designed interactive province selector, bookmark toggles, and KPI cards 
+        showing 34% current access → 98% target with $147M budget roadmap.
+      </div>
+      <a href="https://github.com/TGLORIOUS/data-analytics-portfolio/tree/main/06-maji-ndogo-final-report" target="_blank" class="project-link">VIEW PROJECT →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-tags">
+        <span class="tag tag-sql">SQL</span>
+        <span class="tag tag-sql">SQLite</span>
+      </div>
+      <div class="project-title">TMDB SQL Exam</div>
+      <div class="project-desc">
+        15-question SQL exam on The Movie Database (4,800+ movies, 54,000+ actors).
+        Demonstrated JOINs, aggregations, subqueries, views, and string manipulation 
+        across 12 relational tables.
+      </div>
+      <a href="https://github.com/TGLORIOUS/data-analytics-portfolio/tree/main/03-tmdb-sql-exam" target="_blank" class="project-link">VIEW PROJECT →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-tags">
+        <span class="tag tag-excel">Excel</span>
+      </div>
+      <div class="project-title">Data Entry & Validation Projects</div>
+      <div class="project-desc">
+        Professional data entry portfolio — Excel data cleaning, employee record 
+        validation (13 errors flagged), inventory management, and structured 
+        CSV data entry across multiple business scenarios.
+      </div>
+      <a href="https://github.com/TGLORIOUS/data-entry-portfolio" target="_blank" class="project-link">VIEW PROJECT →</a>
+    </div>
+
+  </div>
+
+  <div style="text-align:center; margin-top:2.5rem;">
+    <a href="https://github.com/TGLORIOUS/data-analytics-portfolio" target="_blank" class="btn-secondary">
+      VIEW ALL PROJECTS ON GITHUB
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-tag">// ABOUT ME</p>
+  <h2 class="section-title">Who I Am</h2>
+
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <p>
+        I'm <strong>Jeleel</strong>, a data analyst based in Abuja, Nigeria, currently 
+        completing my NYSC service year at the <strong>National Identity Management 
+        Commission (NIMC)</strong> where I lead financial bid evaluations across 
+        four procurement categories.
+      </p>
+      <p>
+        My journey into data started with a B.Tech in Industrial Chemistry from 
+        <strong>Federal University of Technology Minna</strong>, and evolved through 
+        ALX Africa's Data Analytics programme where I built expertise in SQL, 
+        Power BI, and data storytelling.
+      </p>
+      <p>
+        I believe data is most powerful when it drives real decisions — not just 
+        reports. Every project in my portfolio is built around that principle.
+      </p>
+      <p>
+        Currently expanding into <strong>Python</strong> and working toward 
+        <strong>Data Engineering</strong> as my next career milestone.
+      </p>
+    </div>
+
+    <div>
+      <p class="section-tag" style="margin-bottom:1rem;">// CERTIFICATIONS</p>
+      <ul class="certs-list">
+        <li class="cert-item">
+          <span class="cert-dot"></span>
+          ALX Africa — Data Analytics
+        </li>
+        <li class="cert-item">
+          <span class="cert-dot"></span>
+          ALX Africa — Virtual Assistance
+        </li>
+        <li class="cert-item">
+          <span class="cert-dot"></span>
+          ALX Africa — Professional Foundations
+        </li>
+        <li class="cert-item" style="border-color: rgba(0,212,255,0.3);">
+          <span class="cert-dot" style="background: var(--accent);"></span>
+          Data Engineering — In Progress
+        </li>
+        <li class="cert-item" style="border-color: rgba(0,212,255,0.3);">
+          <span class="cert-dot" style="background: var(--accent);"></span>
+          Python for Data Analysis — Starting Soon
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-tag">// GET IN TOUCH</p>
+  <h2 class="section-title" style="text-align:center; margin-bottom:2rem;">
+    Open to Opportunities
+  </h2>
+
+  <div class="contact-box fade-in">
+    <h3>Let's Work Together</h3>
+    <p>
+      I'm actively looking for remote Data Analyst and Data Entry roles. 
+      If you have an opportunity or just want to connect, feel free to 
+      reach out through GitHub.
+    </p>
+    <div class="contact-links">
+      <a href="https://github.com/TGLORIOUS" target="_blank" class="btn-primary">
+        GITHUB PROFILE
+      </a>
+      <a href="https://github.com/TGLORIOUS/data-analytics-portfolio" target="_blank" class="btn-secondary">
+        ANALYTICS PORTFOLIO
+      </a>
+      <a href="https://github.com/TGLORIOUS/data-entry-portfolio" target="_blank" class="btn-secondary">
+        DATA ENTRY PORTFOLIO
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Built by Jeleel · Abuja, Nigeria 🇳🇬 · 
+    <a href="https://github.com/TGLORIOUS" style="color: var(--accent); text-decoration:none;">
+      github.com/TGLORIOUS
+    </a>
+  </p>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
