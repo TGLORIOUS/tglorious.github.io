@@ -6,6 +6,10 @@
 
 ## 🧠 About Me
 
+I am a Data Analyst with hands-on experience in SQL, Power BI, Excel, and Google Sheets, passionate about transforming data into actionable insights that solve real-world problems. My work has focused on impactful projects, including analyzing water access inequalities affecting over 27 million people and leveraging data analysis techniques to identify patterns linked to corruption and inefficiencies. 
+
+During my NYSC service year at the **National Identity Management Commission (NIMC)** in Abuja, I supported procurement data processes, financial bid documentation, and administrative data management. Through this experience, I strengthened my analytical, reporting, and data organization skills while contributing to operational efficiency within a government institution.
+
 - 🎓 B.Tech Industrial Chemistry — Federal University of Technology, Minna
 - 📋 Completed NYSC service year at the **National Identity Management Commission (NIMC)**, Abuja
 - 📊 ALX Africa Data Analytics graduate
